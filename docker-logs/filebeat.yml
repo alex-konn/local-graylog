@@ -1,17 +1,23 @@
 filebeat.inputs:
-  - type: docker
-    containers:
-      path: "/usr/share/dockerlogs/data"
-      stream: "stdout"
-      ids:
-        - "*"
-      cri.parse_flags: true
-      combine_partial: true
-      exclude_files: ['\.gz$']
+- type: docker
+  containers:
+    path: /usr/share/dockerlogs/data
+    stream: "stdout"
+    ids:
+      - "*"
+    cri.parse_flags: true
+    combine_partial: true
+    exclude_files: ['\.gz$']
+- type: log
+  enabled: true
+  fields:
+    app_id: filebeat
+  paths:
+    - /usr/share/filebeat/dockerlogs/*.log
 
 processors:
-  - add_docker_metadata:
-      host: "unix:///var/run/docker.sock"
+- add_docker_metadata:
+    host: "unix:///var/run/docker.sock"
 
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
