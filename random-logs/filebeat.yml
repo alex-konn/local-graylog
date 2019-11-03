@@ -1,17 +1,10 @@
 filebeat.inputs:
-- type: docker
-  containers:
-    path: /usr/share/dockerlogs/data
-    stream: "stdout"
-    ids:
-      - "*"
-    cri.parse_flags: true
-    combine_partial: true
-    exclude_files: ['\.gz$']
-
-processors:
-- add_docker_metadata:
-    host: "unix:///var/run/docker.sock"
+- type: log
+  enabled: true
+  fields:
+    app_id: filebeat
+  paths:
+    - /usr/share/filebeat/random-logs/*.log
 
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
@@ -20,7 +13,7 @@ filebeat.config.modules:
 # setup filebeat to send output to logstash
 output.logstash:
   hosts: 
-    - "127.0.0.1:5044"
+    - "127.0.0.1:5045"
 
 # Write Filebeat own logs only to file to avoid catching them with itself in docker log files
 logging.level: error

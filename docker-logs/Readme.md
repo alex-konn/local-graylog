@@ -1,20 +1,14 @@
 # docker-logs
 Contains a filebeat setup to collect logs from all your docker containers and send them to a graylog input.
 The automatic collection of container logs will only work on linux so far.
-The filebeat docker container also allows sending any log file from your computer to the graylog input.
 
 ## Requirements
-- docker
+- [docker](https://www.docker.com/)
 
 ## Getting started
-Initially adjust the `RANDOM_LOGS_PATH` variable in the `run.sh`, by inserting the path for the `random-logs` directory inside this repo.
-If you want to provide local logs, you just need to place them inside the `random-logs` directory. Have a look at the [following section](random-logs/Readme.md) for more information about the random log generation.
-
-On macOS, you can't reference to `127.0.0.1` inside the filebeat.yml and the input. The easiest workaround is using the computers local network ip address.
-
 Creating the docker container:\
 First run `docker build -t local-docker-filebeat:latest .` inside this directory.\
-Finish the stup by executing the `./run.sh`.
+Finish the setup by executing the `./run.sh`.
 
 ## Troubleshooting
 When your graylog input does not receive any data, check if the:
