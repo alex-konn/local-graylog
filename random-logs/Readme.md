@@ -29,7 +29,7 @@ When the contianer is already stopped, get the filebeat container id with `docke
 
 ## Generating random logs
 After finishing the random-logs setup, you can place any log file inside this directory.
-If you want to create random log messesges, you can use a tool like flog.
+If you want to create random log messesges, you can use a tool like [flog](https://github.com/mingrammer/flog).
 
 Examples:
 - Generate a apache log file with 10000 message, with a time difference of 10 seconds for each message.\
