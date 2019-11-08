@@ -29,13 +29,16 @@ When the contianer is already stopped, get the filebeat container id with `docke
 
 ## Generating random logs
 After finishing the random-logs setup, you can place any log file inside this directory.
-If you want to create random log messesges, you can use a tool like [flog](https://github.com/mingrammer/flog).
+If you want to create random log messages, you can use a tool like [flog](https://github.com/mingrammer/flog).
 
 Examples:
 - Generate a apache log file with 10000 message, with a time difference of 10 seconds for each message.\
 `flog -t log -w -s 10 -f apache_common -n 10000`
 - Generate a log message every second, unti you cancel the task.\
 `flog -t log -w -d 1 -f apache_combined -l`
+- Run the flog docker container in the random-logs directory:
+`docker run -it -v $(pwd):/tmp/out --rm mingrammer/flog -t log -w -s 10
+-o /tmp/out/affenmann.log -f apache_common -n 10000`
 
 This setup is inspired by:\
 https://www.freecodecamp.org/news/docker-container-log-analysis-with-elastic-stack-53d5ec9e5953/
